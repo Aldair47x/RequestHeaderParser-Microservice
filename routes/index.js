@@ -1,6 +1,9 @@
 var express = require('express');
 var router = express.Router();
 var useragent = require('express-useragent');
+var ipAdress = require('ip');
+ 
+
 
 /* GET home page. */
 router.get('/', function(req, res) {
@@ -10,8 +13,8 @@ router.get('/', function(req, res) {
 router.get('/api/whoami',function(req,res){
   const language = req.acceptsLanguages();
   const software = "OS: " + req.useragent.os + ", Browser: " + req.useragent.browser;
-  const ip = req.useragent.ipaddress;
-  res.json({'ipaddress':ip, 'language':language[0], 'software':software}).pretty();
+  const ip = ipAdress.address();
+  res.json({'ipaddress': ip, 'language':language[0], 'software':software}).pretty();
 });
 
 module.exports = router;
